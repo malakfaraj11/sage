@@ -24,7 +24,7 @@ const io = new Server(server, {
 });
 
 app.use(cors()); // Allow all origins
-app.use(express.static(__dirname)); // Serve static files
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from public
 app.use(express.json({ limit: '10mb' }));
 
 // Logging
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 // Root route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // API Routes
