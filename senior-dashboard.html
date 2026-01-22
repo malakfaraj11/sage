@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Espace Senior - Symbiose</title>
+    <link rel="stylesheet" href="index.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Specific Styles for Senior Dashboard Accessibility */
+        :root {
+            --senior-bg: #FFFBF0;
+            /* Warm white */
+            --senior-text: #1F2937;
+            --senior-primary: #4338CA;
+            /* High contrast Indigo */
+        }
+
+        body {
+            background-color: var(--senior-bg);
+            font-size: 18px;
+            /* Base larger font */
+        }
+
+        .senior-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+            text-align: center;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .welcome-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            color: var(--senior-primary);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.4rem;
+            color: #4B5563;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .action-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border-left: 10px solid var(--senior-primary);
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .action-card h3 {
+            font-size: 1.8rem;
+            color: var(--senior-text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .form-large input,
+        .form-large textarea,
+        .form-large select {
+            font-size: 1.2rem;
+            padding: 1rem;
+            border-radius: 15px;
+            border: 2px solid #E5E7EB;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        .btn-senior {
+            font-size: 1.3rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            background-color: var(--senior-primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-senior:hover {
+            background-color: #3730A3;
+        }
+
+        .skill-item-large {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: #F3F4F6;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">∞</span>
+                <span class="logo-text">Symbiose</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link" style="font-size: 1.2rem;">Retour Accueil</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="senior-container" style="margin-top: 100px;">
+        <div class="welcome-card">
+            <div class="welcome-title">Bienvenue, <span id="user-name">...</span></div>
+            <div class="welcome-subtitle">C'est un plaisir de vous revoir. Que souhaitez-vous faire aujourd'hui ?</div>
+        </div>
+
+        <div class="action-grid">
+            <!-- Add Skill Section -->
+            <div class="action-card">
+                <h3><i class="fas fa-plus-circle" style="color: var(--secondary-color);"></i> Ajouter un Savoir</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: #666;">Partagez votre expérience avec la
+                    communauté.</p>
+
+                <form id="add-skill-form" class="form-large">
+                    <input type="text" id="skill-name" placeholder="Titre (ex: Cours de Jardinage)" required>
+                    <textarea id="skill-desc" rows="3" placeholder="Description simple..." required></textarea>
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="number" id="skill-price" placeholder="Prix (points)" style="flex:1" required>
+                        <select id="skill-category" style="flex:1">
+                            <option value="Bricolage">Bricolage</option>
+                            <option value="Cuisine">Cuisine</option>
+                            <option value="Langues">Langues</option>
+                            <option value="Art">Art</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-senior">Publier mon savoir</button>
+                </form>
+            </div>
+
+            <!-- Manage Skills Section -->
+            <div class="action-card">
+                <h3><i class="fas fa-list"></i> Mes Savoirs Actuels</h3>
+                <div id="my-skills-list">
+                    <!-- Skills will be loaded here -->
+                    <p>Chargement...</p>
+                </div>
+            </div>
+
+            <!-- Messages Link -->
+            <div class="action-card" onclick="window.location.href='chat.html'"
+                style="cursor: pointer; background: #EEF2FF; border-left-color: var(--secondary-color);">
+                <h3><i class="fas fa-envelope"></i> Ma Messagerie</h3>
+                <p style="font-size: 1.2rem;">Discuter avec mes élèves et amis.</p>
+                <button class="btn-senior" style="background-color: var(--secondary-color); margin-top: 1rem;">Ouvrir
+                    mes messages</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/senior-dashboard.js"></script>
+</body>
+
+</html>

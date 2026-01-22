@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Symbiose</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-light">
+    <div class="auth-container">
+        <a href="index.html" class="auth-logo">
+            <span class="logo-icon">∞</span>
+            <span class="logo-text">Symbiose</span>
+        </a>
+        <div class="auth-card">
+            <h2 class="auth-title">Créer un compte</h2>
+            <p class="auth-subtitle">Rejoignez la communauté intergénérationnelle</p>
+
+            <div id="error-message" class="error-alert" style="display: none;"></div>
+
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Je suis...</label>
+                    <select id="role" required>
+                        <option value="senior">Senior Expert</option>
+                        <option value="youth">Jeune Apprenant</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" required>
+                    <small>Min. 6 caractères</small>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">S'inscrire</button>
+            </form>
+
+            <p class="auth-footer">
+                Déjà un compte ? <a href="login.html">Se connecter</a>
+            </p>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
