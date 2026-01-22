@@ -1,5 +1,5 @@
 // Base URL for API
-const API_URL = 'http://localhost:5001/api/auth';
+const API_URL = '/api/auth';
 
 // Utility: Check if user is logged in
 function isLoggedIn() {

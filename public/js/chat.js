@@ -82,7 +82,7 @@ socket.emit('join-room', roomId);
 console.log(`Joined room: ${roomId}`);
 
 // Fetch history
-fetch(`http://localhost:5001/api/chat/history/${roomId}`)
+fetch(`/api/chat/history/${roomId}`)
     .then(res => res.json())
     .then(messages => {
         messages.forEach(msg => {

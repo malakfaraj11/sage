@@ -1,4 +1,4 @@
-const API_URL_SKILLS = 'http://localhost:5001/api/exchanges';
+const API_URL_SKILLS = '/api/exchanges';
 
 async function fetchSkills() {
     try {

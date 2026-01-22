@@ -64,7 +64,7 @@ form.addEventListener('submit', async (e) => {
     const updatedSkills = [...(user.skills || []), newSkill];
 
     try {
-        const res = await fetch('http://localhost:5001/api/auth/profile', {
+        const res = await fetch('/api/auth/profile', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ window.removeSkill = async (index) => {
     updatedSkills.splice(index, 1);
 
     try {
-        const res = await fetch('http://localhost:5001/api/auth/profile', {
+        const res = await fetch('/api/auth/profile', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
