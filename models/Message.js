@@ -4,15 +4,23 @@ const messageSchema = mongoose.Schema({
     roomId: {
         type: String,
         required: true,
-        index: true // Index for faster queries
+        index: true
     },
     senderId: {
-        type: String, // Storing as String for now to match current prototype logic (or ObjectId if refactoring)
+        type: String,
+        required: true
+    },
+    receiverId: {
+        type: String,
         required: true
     },
     text: {
         type: String,
         required: true
+    },
+    isRead: {
+        type: Boolean,
+        default: false
     },
     timestamp: {
         type: Date,

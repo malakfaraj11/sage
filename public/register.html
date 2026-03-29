@@ -4,33 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Créer un compte Symbiose — communauté intergénérationnelle">
     <title>Inscription - Symbiose</title>
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body class="bg-light">
+<body>
+    <!-- Navbar minimale sur les pages auth -->
+    <header class="header" id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">∞</span>
+                <span class="logo-text">Symbiose</span>
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li class="nav-item"><a href="skills.html" class="nav-link">Compétences</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="login.html" class="btn btn-outline">Se connecter</a>
+                </div>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
     <div class="auth-container">
-        <a href="index.html" class="auth-logo">
-            <span class="logo-icon">∞</span>
-            <span class="logo-text">Symbiose</span>
-        </a>
         <div class="auth-card">
             <h2 class="auth-title">Créer un compte</h2>
             <p class="auth-subtitle">Rejoignez la communauté intergénérationnelle</p>
 
-            <div id="error-message" class="error-alert" style="display: none;"></div>
+            <div id="error-message" class="error-alert" style="display:none;"></div>
 
             <form id="register-form">
                 <div class="form-group">
                     <label for="name">Nom complet</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" placeholder="Jean Dupont" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" placeholder="votre@email.com" required>
                 </div>
                 <div class="form-group">
                     <label for="role">Je suis...</label>
@@ -41,10 +58,9 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" required>
-                    <small>Min. 6 caractères</small>
+                    <input type="password" id="password" placeholder="Min. 6 caractères" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-full">S'inscrire</button>
+                <button type="submit" class="btn btn-primary btn-full">S'inscrire gratuitement</button>
             </form>
 
             <p class="auth-footer">
@@ -52,6 +68,7 @@
             </p>
         </div>
     </div>
+
     <script src="js/main.js"></script>
 </body>
 

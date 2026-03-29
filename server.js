@@ -8,6 +8,8 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import exchangeRoutes from './routes/exchangeRoutes.js';
 import chatRoutes from './routes/chatRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import messageRoutes from './routes/messageRoutes.js';
 import Message from './models/Message.js';
 import { Server } from 'socket.io';
 
@@ -41,7 +43,9 @@ app.get('/', (req, res) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/exchanges', exchangeRoutes); // Public access to see skills
-app.use('/api/chat', chatRoutes);
+app.use('/api/chat', chatRoutes); // Legacy or socket related
+app.use('/api/users', userRoutes);
+app.use('/api/messages', messageRoutes);
 
 // WebSocket
 io.on('connection', (socket) => {

@@ -4,35 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Messagerie intergénérationnelle - Symbiose">
     <title>Messagerie - Symbiose</title>
     <link rel="stylesheet" href="index.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;700&display=swap"
-        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body>
-    <header class="header">
+    <header class="header" id="main-header">
         <div class="container">
             <a href="index.html" class="logo">
                 <span class="logo-icon">∞</span>
                 <span class="logo-text">Symbiose</span>
             </a>
-
             <nav class="nav">
                 <ul class="nav-list">
                     <li class="nav-item"><a href="index.html" class="nav-link">Accueil</a></li>
                     <li class="nav-item"><a href="skills.html" class="nav-link">Compétences</a></li>
-                    <li class="nav-item"><a href="senior-dashboard.html" class="nav-link"
-                            style="color: var(--secondary-color); font-weight: 600;">Espace Senior</a></li>
-                    <li class="nav-item"><a href="chat.html" class="nav-link">Messagerie</a></li>
+                    <li class="nav-item"><a href="senior-dashboard.html" class="nav-link">Espace Senior</a></li>
+                    <li class="nav-item"><a href="chat.html" class="nav-link active"><i class="fas fa-comment-dots" style="font-size:0.75em;margin-right:4px;"></i>Messagerie</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <!-- User info will be inserted here by main.js if logged in -->
+                    <!-- Injecté par main.js selon l'état de connexion -->
                 </div>
             </nav>
+            <button class="mobile-menu-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
@@ -42,26 +40,75 @@
                 <h3>Discussions</h3>
             </div>
             <div id="conversations-list" class="conversations-list">
-                <!-- Conversations active or new contact will appear here -->
+                
+                <!-- Profil Actif -->
                 <div class="conversation-item active">
-                    <div class="avatar-small">
-                        <i class="fas fa-user"></i>
+                    <div class="avatar-small" style="background: rgba(200,133,90,0.2) !important;">
+                        <span style="font-weight: 400; font-size: 1rem; color: var(--c-white);">MA</span>
                     </div>
-                    <div>
-                        <div id="chat-partner-name" class="conversation-name">Chargement...</div>
-                        <div class="conversation-last-msg">En ligne</div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                            <div id="chat-partner-name" class="conversation-name">Marie Dupont</div>
+                            <span style="font-size: 0.75rem; color: var(--c-warm, #c8855a);">10:42</span>
+                        </div>
+                        <div class="conversation-last-msg">Super, Merci ! À tout à l'heure.</div>
                     </div>
                 </div>
+
+                <!-- Profil 2 -->
+                <div class="conversation-item">
+                    <div class="avatar-small" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--c-off);">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                            <div class="conversation-name">L'Atelier Bois</div>
+                            <span style="font-size: 0.75rem; color: rgba(184,180,170,0.5);">Hier</span>
+                        </div>
+                        <div class="conversation-last-msg">Oui, j'ai les outils nécessaires.</div>
+                    </div>
+                </div>
+
+                <!-- Profil 3 -->
+                <div class="conversation-item">
+                    <div class="avatar-small" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--c-off);">
+                        <span style="font-weight: 400; font-size: 1rem;">JL</span>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                            <div class="conversation-name">Jean-Louis</div>
+                            <span style="font-size: 0.75rem; color: rgba(184,180,170,0.5);">Mar</span>
+                        </div>
+                        <div class="conversation-last-msg">Est-ce que ça te convient pour...</div>
+                    </div>
+                </div>
+
+                <!-- Profil 4 (Message non lu) -->
+                <div class="conversation-item">
+                    <div class="avatar-small" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: var(--c-off);">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                            <div class="conversation-name" style="color: var(--c-white); font-weight: 500;">Sophie Art</div>
+                            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                                <span style="font-size: 0.75rem; color: var(--c-warm, #c8855a); font-weight: 600;">09:15</span>
+                                <span style="background: var(--c-warm, #c8855a); color: #1a0e08; font-size: 0.65rem; border-radius: 50%; width: 16px; height: 16px; display: flex; justify-content: center; align-items: center;">1</span>
+                            </div>
+                        </div>
+                        <div class="conversation-last-msg" style="color: rgba(244,242,238,0.8);">Bonjour, êtes-vous disponible ?</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <div class="chat-main">
             <div class="chat-header">
-                <button id="back-to-list" class="btn-icon mobile-only"
-                    style="margin-right: 1rem; color: var(--dark-color); background: none;">
+                <button id="back-to-list" class="btn-icon mobile-only" style="margin-right:1rem;background:none;border:none;color:var(--c-off);">
                     <i class="fas fa-arrow-left"></i>
                 </button>
-                <div class="chat-user-info">
+                <div class="chat-user-info" style="display:flex;align-items:center;gap:14px;">
                     <div class="avatar-small">
                         <i class="fas fa-user"></i>
                     </div>
@@ -70,22 +117,20 @@
             </div>
 
             <div id="messages-area" class="messages-area">
-                <!-- Messages will appear here -->
-                <div class="text-center" style="color: var(--gray-color); margin-top: 2rem;">
+                <div class="text-center" style="color:var(--c-muted);margin-top:2rem;font-family:var(--font-ui);font-size:0.9rem;">
                     Début de la conversation
                 </div>
             </div>
 
             <form id="message-form" class="message-input-area">
                 <input type="text" id="message-input" placeholder="Écrivez votre message..." autocomplete="off">
-                <button type="submit" class="btn btn-primary btn-icon">
+                <button type="submit" class="btn-icon">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </form>
         </div>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="js/chat.js"></script>
 </body>

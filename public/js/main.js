@@ -114,5 +114,41 @@ if (registerForm) {
     });
 }
 
+/**
+ * Modern Dark Tech - Parallax Micro-interactions
+ * Subtle tilt effect for cards and images
+ */
+class ParallaxEffect {
+    constructor() {
+        this.elements = document.querySelectorAll('.hero-image, .step-card, .skill-card, .testimonial-card');
+        this.init();
+    }
+    
+    init() {
+        this.elements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+    }
+}
+
 // Run on page load
-document.addEventListener('DOMContentLoaded', updateAuthUI);
+document.addEventListener('DOMContentLoaded', () => {
+    updateAuthUI();
+    new ParallaxEffect();
+});
