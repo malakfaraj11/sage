@@ -1,92 +1,130 @@
-# 🚀 Skill Swap App - PFA Project
+# 🌟 Symbiose - Plateforme d'Échange Intergénérationnel
 
-[![MERN Stack](https://img.shields.io/badge/Stack-MERN-blue.svg)](https://www.mongodb.com/mern-stack)
+[![MEN Stack](https://img.shields.io/badge/Stack-MEN%20(Vanilla_JS)-blue.svg)](https://www.mongodb.com/)
+[![Socket.io](https://img.shields.io/badge/Realtime-Socket.io-black.svg?logo=socket.io)](https://socket.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Symbiose** est une plateforme communautaire d'échange de compétences basée sur le principe du "Time-Banking". L'objectif est de permettre aux utilisateurs de partager leur savoir-faire (cuisine, programmation, langues, etc.) contre d'autres services, sans transaction monétaire.
+**Symbiose** est une plateforme communautaire d'échange de compétences basée sur le principe du "Time-Banking". L'objectif est de permettre aux utilisateurs (particulièrement des experts séniors et des apprentis) de partager leur savoir-faire (artisanat, programmation, langues, menuiserie, etc.) contre d'autres services, sans aucune transaction monétaire.
 
-
-
-[Image of MERN stack architecture diagram]
-
+L'application bénéficie d'une charte graphique résolument moderne, **Luxe Éditorial et Sombre (Dark Mode)**, favorisant une lecture apaisante, avec des accents chaleureux et une UI premium.
 
 ---
 
 ## 📖 Sommaire
-1. [Fonctionnalités](#-fonctionnalités)
-2. [Backlog & User Stories](#-backlog--user-stories)
-3. [Technologies utilisées](#-technologies-utilisées)
-4. [Structure du Projet](#-structure-du-projet)
-5. [Installation](#-installation-et-configuration)
-6. [Auteur](#-auteur)
+1. [Fonctionnalités Clés](#-fonctionnalités-clés)
+2. [Technologies Utilisées](#-technologies-utilisées)
+3. [Structure du Projet](#-structure-du-projet)
+4. [Installation & Configuration](#-installation--configuration)
+5. [Aperçu de la Messagerie](#-messagerie-temps-réel--notifications)
 
 ---
 
-## ✨ Fonctionnalités
-- **Authentification sécurisée :** Inscription/Connexion via JWT.
-- **Gestion de Profil :** Liste des compétences "Offertes" et "Recherchées".
-- **Recherche Avancée :** Filtres par catégories et mots-clés.
-- **Messagerie Temps Réel :** Chat intégré pour organiser les échanges.
-- **Système de Crédits :** Un système où 1 heure donnée = 1 crédit de temps gagné.
+## ✨ Fonctionnalités Clés
+
+- **Aesthétique "Luxe Éditorial" :** Interface utilisateur en mode sombre intégral, avec polices Serif élégantes (Cormorant Garamond) et nuances territoriales (Ocre/Bronze).
+- **Authentification Sécurisée (JWT) :** Gestion de l'inscription et de la connexion (Login/Register) avec des Tokens Web JSON et mots de passe cryptés.
+- **Tableau de Bord & Profils :** Affichage optimisé des compétences sous forme de "Cartes Premiums" et gestion fine du profil.
+- **Messagerie Temps Réel (Style WhatsApp) :**
+  - Instantanéité propulsée par **Socket.io**.
+  - Historique des messages persistés sur MongoDB.
+  - **Système de Badges Non-lus** dynamiques et réactifs.
+  - Interface divisée avec barre latérale (Sidebar) intelligente et état actf au clic.
+- **Responsive Design Complet :** Expérience fluide, du smartphone au desktop large avec navigation "Sticky Glassmorphism".
 
 ---
 
-## 📋 Backlog & User Stories (À intégrer dans GitHub Issues)
+## 🛠 Technologies Utilisées
 
-### 1. Profil & Authentification
-**US#1 : Créer un profil complet**
-- **En tant que :** Nouvel utilisateur
-- **Je veux :** Créer un compte et renseigner mes compétences
-- **Critères d’acceptation :** - Inscription via Email/Pass.
-    - Profil avec Nom, Bio, Localisation et Tags de compétences.
-    - Upload de photo de profil fonctionnel.
+Le projet a évolué d'une architecture MERN vers une approche **MEN + Vanilla JS** pure, plus légère et performante, avec moteur de rendu direct par le serveur.
 
-**US#2 : Système de Notation**
-- **En tant qu' :** Utilisateur ayant terminé un échange
-- **Je veux :** Laisser une note (1-5) et un commentaire
-- **Critères d’acceptation :** Accessible uniquement si l'échange est marqué "Terminé".
+**Backend :**
+- **Node.js** & **Express.js** : Serveur HTTP et API RESTful.
+- **MongoDB** & **Mongoose** : Base de données NoSQL orientée documents.
+- **Socket.io** : Couche WebSockets pour le temps réel.
+- **JWT (JsonWebToken)** : Authentification sans session.
 
-### 2. Matching & Recherche
-**US#3 : Recherche par Compétence**
-- **En tant qu' :** Utilisateur
-- **Je veux :** Filtrer les profils par tag ou par type (Présentiel/Distanciel)
-- **Critères d’acceptation :** Barre de recherche avec auto-complétion et affichage sous forme de cartes.
-
-### 3. Messagerie & Flux d'échange
-**US#4 : Messagerie Temps Réel**
-- **En tant qu' :** Utilisateur
-- **Je veux :** Envoyer un message privé à un partenaire potentiel
-- **Critères d’acceptation :** Chat instantané via Socket.io avec historique.
-
-**US#5 : Validation d'Échange**
-- **En tant que :** Demandeur
-- **Je veux :** Envoyer une demande officielle (date/heure/sujet)
-- **Critères d’acceptation :** Statuts `En attente`, `Accepté`, `Refusé`. Mise à jour du solde de crédits à la fin.
-
----
-
-## 🛠 Technologies utilisées
-
-**Stack MERN :**
-- **MongoDB :** Base de données NoSQL (Mongoose ODM).
-- **Express.js :** Framework Backend.
-- **React.js :** Frontend (Tailwind CSS pour le design).
-- **Node.js :** Environnement d'exécution.
-- **Socket.io :** Communication bidirectionnelle pour le chat.
+**Frontend (Dossier `public/`) :**
+- **HTML5 & CSS3 natif** : Variables CSS dynamiques (`:root`), Flexbox/Grid, aucun framework lourd (Zero Tailwind, Zero React).
+- **Vanilla JavaScript** : Appels `fetch()`, manipulation du DOM native.
 
 ---
 
 ## 📂 Structure du Projet
 
+Le backend sert directement l'application frontend qui se trouve dans le répertoire `public`.
+
 ```text
-skill-swap-app/
-├── client/                # React App (Frontend)
-│   ├── src/
-│   │   ├── components/    # UI & Shared Components
-│   │   ├── pages/         # Views
-│   │   └── context/       # Auth & Global State
-├── server/                # Node.js App (Backend)
-│   ├── models/            # Mongoose Schemas (User, Skill, Message)
-│   ├── routes/            # API Endpoints
-│   └── controllers/       # Business Logic
+sage/
+├── server.js                  # Point d'entrée principal Node/Express (Socket.io)
+├── config/
+│   └── db.js                  # Configuration de connexion MongoDB
+├── controllers/               # Logique métier backend
+│   ├── authController.js      # Register, Login
+│   ├── messageController.js   # Chat history, Mark-as-read
+│   └── userController.js      # Fetch Users, Unread notifications logic
+├── models/                    # Schémas Mongoose
+│   ├── User.js
+│   └── Message.js             
+├── routes/                    # Routeurs Express
+│   ├── authRoutes.js
+│   └── messageRoutes.js       
+├── public/                    # FRONTEND (Servi statiquement)
+│   ├── css/
+│   │   └── index.css          # Design System "Luxe Éditorial"
+│   ├── js/
+│   │   ├── chat.js            # Logique Socket.io + Fetch WhatsApp UI
+│   │   └── main.js
+│   ├── images/
+│   ├── index.html             # Landing (Hero Section)
+│   ├── chat.html              # Messagerie
+│   ├── skills.html            # Catalogue des Compétences
+│   └── login.html             # Authentification
 └── README.md
+```
+
+---
+
+## 🚀 Installation & Configuration
+
+### Prérequis
+- [Node.js](https://nodejs.org/) (v16+ recommandé)
+- Un compte gratuit [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) ou MongoDB en local.
+
+### 1. Cloner le projet
+```bash
+git clone https://github.com/malakfaraj11/sage.git
+cd sage
+```
+
+### 2. Installer les dépendances
+```bash
+npm install
+```
+
+### 3. Configurer les variables d'environnement
+Créez un fichier `.env` à la racine du projet et ajoutez vos clés :
+```env
+PORT=5001
+MONGO_URI=votre_chaine_de_connexion_mongodb
+JWT_SECRET=super_secret_symbiose_key
+CLIENT_URL=http://localhost:5001
+```
+
+### 4. Lancer le serveur (Mode Développement)
+```bash
+npm start
+```
+*Le serveur démarrera sur `http://localhost:5001`.*
+
+---
+
+## 💬 Messagerie Temps Réel & Notifications 
+
+Fièrement développée pour cette architecture, la messagerie combine des requêtes HTTP pour la fiabilité à `Socket.io` pour l'instantanéité.
+
+- **Badging dynamique :** Compte le nombre exact d'alertes via l'API.
+- **Marquer comme lu :** Implémentation complète de méthodes HTTP `PUT` pour rafraîchir la base de données après clics.
+- **Surbrillance automatique :** Au nouvel arrivage d'un message, l'icône, le profil, et le nombre de non-lus s'incrémentent visuellement sans rechargement.
+
+---
+*Projet de fin d'année réalisé par malakfaraj11.*
