@@ -2550,9 +2550,27 @@ body > *:not(header):first-child {
   padding-top: max(80px, env(safe-area-inset-top));
 }
 
+/* 13. Global Navbar Badge */
+.nav-badge {
+  background: #c48660;
+  color: #ffffff;
+  font-size: 0.65rem;
+  border-radius: 50%;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  margin-left: 6px;
+  vertical-align: middle;
+  box-shadow: 0 0 10px rgba(196,134,96,0.3);
+}
+
 /* ===================================================================
    END — Global Harmonization
-=================================================================== */
+   =================================================================== */
 
 /* ===================================================================
    PAGE: MESSAGERIE — Full Dark Mode + Sidebar Breathing

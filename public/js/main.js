@@ -147,8 +147,52 @@ class ParallaxEffect {
     }
 }
 
+// Update Global Navbar Unread Badge
+async function updateGlobalUnreadBadge() {
+    const user = getUser();
+    if (!user || !user._id) return;
+
+    try {
+        const res = await fetch(`/api/messages/unread-count?currentUserId=${user._id}`);
+        const unreadMap = await res.json();
+        
+        let totalCount = 0;
+        Object.values(unreadMap).forEach(count => {
+            totalCount += count;
+        });
+
+        // Find the "Messagerie" link in ALL nav clones (mobile, desktop...)
+        const chatLinks = document.querySelectorAll('a[href="chat.html"]');
+        chatLinks.forEach(link => {
+            let badge = link.querySelector('.nav-badge');
+            
+            if (totalCount > 0) {
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'nav-badge';
+                    link.appendChild(badge);
+                }
+                badge.textContent = totalCount;
+            } else if (badge) {
+                badge.remove();
+            }
+        });
+    } catch (err) {
+        console.error('Error updating global unread badge:', err);
+    }
+}
+
+// Make it globally accessible for chat.js
+window.updateGlobalUnreadBadge = updateGlobalUnreadBadge;
+
 // Run on page load
 document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
+    updateGlobalUnreadBadge();
     new ParallaxEffect();
+    
+    // Auto-update every 30 seconds if NOT on chat page (since chat page updates in realtime)
+    if (!window.location.pathname.includes('chat.html')) {
+        setInterval(updateGlobalUnreadBadge, 30000);
+    }
 });

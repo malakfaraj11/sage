@@ -127,4 +127,4 @@ Fièrement développée pour cette architecture, la messagerie combine des requ�
 - **Surbrillance automatique :** Au nouvel arrivage d'un message, l'icône, le profil, et le nombre de non-lus s'incrémentent visuellement sans rechargement.
 
 ---
-*Projet de fin d'année réalisé par malakfaraj11.*
+*Projet d'examen réalisé par malakfaraj.*

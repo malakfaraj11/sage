@@ -45,8 +45,17 @@ async function fetchUsers() {
         list.innerHTML = '';
         
         // Ne pas s'afficher soi-même
-        const filteredUsers = users.filter(u => u._id !== currentUserId);
+        let filteredUsers = users.filter(u => u._id !== currentUserId);
         
+        // Trier pour mettre les messages non lus en haut dès le chargement initial
+        filteredUsers.sort((a, b) => {
+            const countA = unreadMap[a._id] || 0;
+            const countB = unreadMap[b._id] || 0;
+            if (countA > 0 && countB === 0) return -1;
+            if (countB > 0 && countA === 0) return 1;
+            return 0; // Garder l'ordre alphabétique pour le reste
+        });
+
         if (filteredUsers.length === 0) {
             list.innerHTML = '<div style="padding: 1rem; color: rgba(184,180,170,0.5);">Aucun contact trouvé</div>';
             return;
@@ -135,6 +144,9 @@ function handleSelectContact(user, div, initials) {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ currentUserId: currentUserId })
+    }).then(() => {
+        // Sync Navbar badge
+        if (window.updateGlobalUnreadBadge) window.updateGlobalUnreadBadge();
     }).catch(err => console.error("Erreur mark-read", err));
 
     // Rejoindre la room (Realtime)
@@ -225,6 +237,9 @@ messageForm.addEventListener('submit', async (e) => {
         
         appendMessage(storedMsg);
         
+        // Monter le profil en haut de la liste (Priorité)
+        if (selectedUserId) moveContactToTop(selectedUserId);
+        
         const roomId = [currentUserId, selectedUserId].sort().join('-');
         if (socket) {
             // Emulate backend broadcast for prototype purpose if needed
@@ -235,9 +250,41 @@ messageForm.addEventListener('submit', async (e) => {
     }
 });
 
+// Helper: Move contact to the top of the list with animation
+function moveContactToTop(userId) {
+    if (!userId) return;
+    const list = document.getElementById('conversations-list');
+    if (!list) return;
+
+    // Use specific selector for the dataset ID
+    const contactDiv = list.querySelector(`.conversation-item[data-id="${userId}"]`);
+    
+    if (contactDiv) {
+        // Only move if not already at the top to avoid flickering
+        if (list.firstChild !== contactDiv) {
+            list.prepend(contactDiv);
+        }
+        
+        // Feedback visuel (pulse)
+        contactDiv.classList.remove('pulse-move');
+        void contactDiv.offsetWidth; // Force reflow for restart animation
+        contactDiv.classList.add('pulse-move');
+    }
+}
+
 // Temps Réel (Socket.io)
 if (socket) {
     socket.on('receive-message', (data) => {
+        console.log("Message reçu de:", data.userId);
+        
+        // Déterminer qui doit monter en haut de la liste
+        const isFromMe = (data.userId === currentUserId);
+        const contactIdToMove = isFromMe ? selectedUserId : data.userId;
+        
+        if (contactIdToMove) {
+            moveContactToTop(contactIdToMove);
+        }
+
         // Si la discussion est ouverte
         if (selectedUserId === data.userId || currentUserId === data.userId) {
             appendMessage({
@@ -251,6 +298,8 @@ if (socket) {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ currentUserId: currentUserId })
+                }).then(() => {
+                    if (window.updateGlobalUnreadBadge) window.updateGlobalUnreadBadge();
                 }).catch(err => console.log('background mark-read fail', err));
             }
         } 
@@ -261,6 +310,9 @@ if (socket) {
                 // Incrémente dynamiquement le state
                 unreadMap[data.userId] = (unreadMap[data.userId] || 0) + 1;
                 
+                // Sync Navbar badge
+                if (window.updateGlobalUnreadBadge) window.updateGlobalUnreadBadge();
+
                 // Mettre à jour l'UI dynamiquement
                 const nameEl = contactDiv.querySelector('.conversation-name');
                 if (nameEl) {
